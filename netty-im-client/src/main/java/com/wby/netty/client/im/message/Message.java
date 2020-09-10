@@ -6,4 +6,5 @@ package com.wby.netty.client.im.message;
  * @Author wuby31052
  */
 public interface Message {
+
 }

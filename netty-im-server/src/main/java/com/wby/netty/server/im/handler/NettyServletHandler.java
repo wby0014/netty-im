@@ -22,7 +22,7 @@ public class NettyServletHandler extends SimpleChannelInboundHandler<Request> {
     protected void channelRead0(ChannelHandlerContext ctx, Request request) throws Exception {
         Response response = new Response();
         ChannelId channelId = ctx.channel().id();
-       log.info("channelId: " + channelId);
+        log.info("channelId: " + channelId);
         log.info("RequestMessage: " + request.toString());
         if (log.isDebugEnabled()) {
             log.debug(String.format("[%s] 接收到一个正确的请求", channelId));

@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2020/9/9 15:12
  * @Author wuby31052
  */
-@SpringBootApplication(scanBasePackages = "com.wby.netty.server.im")
+@SpringBootApplication
 public class ApplicationStarter {
 
     public static void main(String[] args) {

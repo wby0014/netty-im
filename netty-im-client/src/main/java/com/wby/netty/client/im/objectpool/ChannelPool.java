@@ -1,4 +1,4 @@
-package com.wby.netty.client.im.pool;
+package com.wby.netty.client.im.objectpool;
 
 import io.netty.channel.Channel;
 

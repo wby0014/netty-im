@@ -2,6 +2,7 @@ package com.wby.netty.server.im.server;
 
 import com.wby.netty.server.im.common.ApplicationContextUtils;
 import com.wby.netty.server.im.config.ConfigUtils;
+import com.wby.netty.server.im.config.ServerProperties;
 import com.wby.netty.server.im.handler.HeartBeatServerHandler;
 import com.wby.netty.server.im.handler.NettyServletHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -34,10 +35,14 @@ public class ImNettyServer implements IServerBootstrap {
     @Resource(name = "workGroup")
     private NioEventLoopGroup workGroup;
 
+    @Resource
+    private ServerProperties serverProperties;
+
     private Channel channel;
 
     @Override
     public void startup() throws InterruptedException {
+        log.info("自定义配置项：" + serverProperties.getIp());
         String[] protocols = StringUtils.commaDelimitedListToStringArray(ConfigUtils.get("netty.server.protocol"));
         String port;
         InetSocketAddress localAddress;
@@ -56,19 +61,19 @@ public class ImNettyServer implements IServerBootstrap {
                             ChannelPipeline pipeline = socketChannel.pipeline();
                             pipeline.addLast("decoder", (ChannelHandler) ApplicationContextUtils.getBean(protocol + "Decoder"));
                             pipeline.addLast("encoder", (ChannelHandler) ApplicationContextUtils.getBean(protocol + "Encoder"));
-                            pipeline.addLast("handler", ApplicationContextUtils.getBean(NettyServletHandler.class));
-                            pipeline.addLast("handler", ApplicationContextUtils.getBean(HeartBeatServerHandler.class));
-
+                            pipeline.addLast(ApplicationContextUtils.getBean(NettyServletHandler.class));
+                            pipeline.addLast(ApplicationContextUtils.getBean(HeartBeatServerHandler.class));
                         }
                     }
             );
             ChannelFuture channelFuture = serverBootstrap.bind(localAddress).sync();
             channel = channelFuture.channel();
+            String finalPort = port;
             channelFuture.addListener((ChannelFutureListener) channelFuture1 -> {
                 if (channelFuture1.isSuccess()) {
-                    log.info(String.format("启用[%s]协议成功", protocol));
+                    log.info(String.format("[%s]协议启用端口[%s]成功", new Object[]{protocol, finalPort}));
                 } else {
-                    log.error(String.format("启用[%s]协议失败", protocol));
+                    log.error(String.format("[%s]协议启用端口[%s]失败", new Object[]{protocol, finalPort}));
                 }
             });
         }

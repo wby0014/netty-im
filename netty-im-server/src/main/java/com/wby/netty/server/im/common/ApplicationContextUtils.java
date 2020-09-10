@@ -3,10 +3,10 @@ package com.wby.netty.server.im.common;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * @Description
@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 @Component
 public class ApplicationContextUtils implements ApplicationContextAware {
 
-    public static final Pattern COMMA_SPLIT_PATTERN = Pattern.compile("\\s*[,]+\\s*");
     protected static ApplicationContext context;
 
     @Override
