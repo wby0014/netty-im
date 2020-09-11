@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author wuby31052
  */
 @SpringBootApplication
-public class ApplicationStarter {
+public class NettyServerStarter {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationStarter.class, args);
+        SpringApplication.run(NettyServerStarter.class, args);
     }
 }

@@ -20,8 +20,10 @@ public class HeartBeatServerHandler extends IdleStateHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(HeartBeatServerHandler.class);
 
+    private static final int READER_IDLE_TIME = 30;
+
     public HeartBeatServerHandler() {
-        super(3, 3, 3, TimeUnit.MINUTES);
+        super(READER_IDLE_TIME, 30, 30, TimeUnit.SECONDS);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class HeartBeatServerHandler extends IdleStateHandler {
 
     @Override
     protected void channelIdle(ChannelHandlerContext ctx, IdleStateEvent evt) throws Exception {
-        System.out.println("3分钟内未读到数据，关闭连接");
+        System.out.println(READER_IDLE_TIME + "秒内未读到数据，关闭连接");
         super.channelIdle(ctx, evt);
     }
 

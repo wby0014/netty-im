@@ -28,7 +28,7 @@ public class HeartBeatClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        logger.info("msg:" + msg);
+        logger.info("client 收到服务端消息msg:" + msg);
         if (null == msg || !(msg instanceof Message)) {
             super.channelRead(ctx, msg);
             return;

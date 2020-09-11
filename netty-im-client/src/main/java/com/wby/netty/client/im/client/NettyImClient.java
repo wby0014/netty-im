@@ -82,7 +82,7 @@ public class NettyImClient extends SimpleChannelInboundHandler<ClientResponse> i
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            group.shutdownGracefully();
+//            group.shutdownGracefully();
         }
     }
 
@@ -97,6 +97,7 @@ public class NettyImClient extends SimpleChannelInboundHandler<ClientResponse> i
         Future<Channel> future = pool.acquire();
         future.addListener((FutureListener<Channel>) f1 -> {
             if (f1.isSuccess()) {
+                log.info("get channel success");
                 Channel ch = f1.getNow();
                 ch.writeAndFlush("request");
                 pool.release(ch);
