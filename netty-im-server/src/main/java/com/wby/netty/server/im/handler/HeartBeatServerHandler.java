@@ -1,11 +1,15 @@
 package com.wby.netty.server.im.handler;
 
 import com.wby.netty.server.im.message.Message;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
@@ -15,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/9/8 14:01
  * @Author wuby31052
  */
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
 public class HeartBeatServerHandler extends IdleStateHandler {
 

@@ -2,6 +2,8 @@ package com.wby.netty.client.im.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @Description
@@ -9,8 +11,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @Author wuby31052
  */
 public class ImJsonClientEncoder extends SimpleChannelInboundHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(ImJsonClientEncoder.class);
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
+        logger.info("client encoder receive");
 
     }
 }

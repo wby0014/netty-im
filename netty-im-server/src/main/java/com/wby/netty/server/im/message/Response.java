@@ -12,7 +12,16 @@ import java.util.Map;
  */
 public class Response implements Message {
 
-    private Map<String, List<String>> headers = new HashMap<String, List<String>>();
+    private Map<String, List<String>> headers = new HashMap<>();
+    private Object content = null;
+
+    public Response(Message message) {
+        this.headers = message.getHeaders();
+        this.content = message.getContent();
+    }
+
+    public Response() {
+    }
 
     public String getHeader(String name, String defaultHeader) {
         List<String> header = headers.get(name);
@@ -31,4 +40,13 @@ public class Response implements Message {
         headers.put(name, values);
     }
 
+    @Override
+    public Map<String, List<String>> getHeaders() {
+        return headers;
+    }
+
+    @Override
+    public Object getContent() {
+        return content;
+    }
 }
